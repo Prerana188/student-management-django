@@ -3,11 +3,11 @@ from pathlib import Path
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-SECRET_KEY = "replace-this-with-a-secure-secret-key"
+SECRET_KEY = os.environ.get("SECRET_KEY")
 
-DEBUG = False
+DEBUG = os.environ.get("DEBUG") == "True"
 
-ALLOWED_HOSTS: list[str] = ["*"]
+ALLOWED_HOSTS = os.environ.get("ALLOWED_HOSTS","*").split(",")
 
 INSTALLED_APPS = [
     "django.contrib.admin",
@@ -90,7 +90,7 @@ USE_TZ = True
 
 STATIC_URL = "/static/"
 STATICFILES_DIRS = [BASE_DIR / "static"]
-STATIC_ROOT = BASE_DIR / "staticfiles"
+STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
