@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block title %}Home - Student Management{% endblock %}
+
+{% block content %}
+<div class="mt-5">
+    {% if user.is_authenticated %}
+        <h2 class="mb-3">Welcome, {{ user.first_name|default:user.username }}!</h2>
+        <p><strong>Email:</strong> {{ user.email }}</p>
+        <p><strong>Phone:</strong> {{ user.phone_number }}</p>
+        <a href="{% url 'logout' %}" class="btn btn-outline-danger mt-3">Logout</a>
+    {% else %}
+        <div class="text-center">
+            <h2 class="mb-4">Welcome to the Student Management App</h2>
+            <p class="mb-4">Register as a new student or login to view your profile.</p>
+            <a class="btn btn-primary me-2" href="{% url 'register' %}">Register</a>
+            <a class="btn btn-outline-primary" href="{% url 'login' %}">Login</a>
+        </div>
+    {% endif %}
+</div>
+{% endblock %}
+
